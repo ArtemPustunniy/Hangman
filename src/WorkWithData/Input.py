@@ -24,8 +24,8 @@ class Input:
                 Utils.clear_console()
             else:
                 language_flag = False
-        except:
-            pass
+        except TypeError:
+            self.info_input.error_log()
         while not language_flag:
             Utils.clear_console()
             try:
@@ -36,7 +36,8 @@ class Input:
                     Utils.clear_console()
                 else:
                     language_flag = False
-            except:
+            except TypeError:
+                self.info_input.error_log()
                 self.info_input.warning_unavailable_language_number()
 
     def input_category_index(self):
@@ -48,8 +49,8 @@ class Input:
                 Utils.clear_console()
             else:
                 category_flag = False
-        except:
-            pass
+        except TypeError:
+            self.info_input.error_log()
 
         while not category_flag:
             Utils.clear_console()
@@ -61,7 +62,8 @@ class Input:
                     Utils.clear_console()
                 else:
                     category_flag = False
-            except:
+            except TypeError:
+                self.info_input.error_log()
                 self.info_input.warning_unavailable_category_number()
 
     def input_level(self):
@@ -73,8 +75,8 @@ class Input:
                 Utils.clear_console()
             else:
                 level_flag = False
-        except:
-            pass
+        except TypeError:
+            self.info_input.error_log()
 
         while not level_flag:
             Utils.clear_console()
@@ -86,7 +88,8 @@ class Input:
                     Utils.clear_console()
                 else:
                     level_flag = False
-            except:
+            except TypeError:
+                self.info_input.error_log()
                 self.info_input.warning_unavailable_level_number()
 
     def input_attempts(self):
@@ -98,8 +101,8 @@ class Input:
                 Utils.clear_console()
             else:
                 attempts_flag = False
-        except:
-            pass
+        except TypeError:
+            self.info_input.error_log()
 
         while not attempts_flag:
             Utils.clear_console()
@@ -111,5 +114,6 @@ class Input:
                     Utils.clear_console()
                 else:
                     attempts_flag = False
-            except:
+            except TypeError:
+                self.info_input.error_log()
                 self.info_input.warning_unavailable_attempts_number()

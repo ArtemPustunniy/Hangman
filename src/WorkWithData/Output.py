@@ -208,3 +208,8 @@ class InfoForInput:
             if self.language == 2
             else "Please enter the allowed number of attempts"
         )
+
+    def error_log(self):
+        with open("Logs/logs.txt", "a") as log_file:
+            log_file.write('Неверный ввод\n')
+
