@@ -1,5 +1,6 @@
 import random
 from collections import Counter
+from WorkWithData.Output import InfoForInput
 
 
 class Word:
@@ -291,8 +292,8 @@ class Word:
                 if self.level_index == 4:
                     self.level_index = random.randint(1, 3)
                 self.level = self.list_level[self.level_index - 1]
-            except:
-                raise IndexError
+            except TypeError:
+                InfoForInput.error_log()
         else:
             try:
                 if self.category_index == 5:
@@ -301,8 +302,8 @@ class Word:
                 if self.level_index == 4:
                     self.level_index = random.randint(1, 3)
                 self.level = self.list_level_in_Russian[self.level_index - 1]
-            except:
-                raise IndexError
+            except TypeError:
+                InfoForInput.error_log()
 
         self.select_strings_by_difficulty()
 

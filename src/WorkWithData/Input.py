@@ -25,7 +25,7 @@ class Input:
             else:
                 language_flag = False
         except TypeError:
-            self.info_input.error_log()
+            InfoForInput.error_log()
         while not language_flag:
             Utils.clear_console()
             try:
@@ -37,7 +37,7 @@ class Input:
                 else:
                     language_flag = False
             except TypeError:
-                self.info_input.error_log()
+                InfoForInput.error_log()
                 self.info_input.warning_unavailable_language_number()
 
     def input_category_index(self):
@@ -50,7 +50,7 @@ class Input:
             else:
                 category_flag = False
         except TypeError:
-            self.info_input.error_log()
+            InfoForInput.error_log()
 
         while not category_flag:
             Utils.clear_console()
@@ -63,7 +63,7 @@ class Input:
                 else:
                     category_flag = False
             except TypeError:
-                self.info_input.error_log()
+                InfoForInput.error_log()
                 self.info_input.warning_unavailable_category_number()
 
     def input_level(self):
@@ -76,7 +76,7 @@ class Input:
             else:
                 level_flag = False
         except TypeError:
-            self.info_input.error_log()
+            InfoForInput.error_log()
 
         while not level_flag:
             Utils.clear_console()
@@ -89,7 +89,7 @@ class Input:
                 else:
                     level_flag = False
             except TypeError:
-                self.info_input.error_log()
+                InfoForInput.error_log()
                 self.info_input.warning_unavailable_level_number()
 
     def input_attempts(self):
@@ -102,7 +102,7 @@ class Input:
             else:
                 attempts_flag = False
         except TypeError:
-            self.info_input.error_log()
+            InfoForInput.error_log()
 
         while not attempts_flag:
             Utils.clear_console()
