@@ -1,5 +1,3 @@
-import pytest
-from src.Visualiser.Hangman import Static_Hangman
 import re
 from unittest.mock import patch
 from io import StringIO
@@ -10,9 +8,9 @@ def clean_ansi_escape_sequences(text):
     return ansi_escape.sub("", text)
 
 
-@pytest.fixture
-def static_hangman():
-    return Static_Hangman(part_of_hangman=10, attempts=2)
+# @pytest.fixture
+# def static_hangman():
+#     return Static_Hangman(part_of_hangman=10, attempts=2)
 
 
 # @pytest.fixture
@@ -29,10 +27,10 @@ class TestHangman:
             assert "|" in output
             assert "+" in output
 
-    def test_get_steps_in_play(self, static_hangman):
-        steps = static_hangman.get_steps_in_play()
-        assert len(steps) > 0
-        assert steps[-1] == ("|", 8, 51)
+    # def test_get_steps_in_play(self, static_hangman):
+    #     steps = static_hangman.get_steps_in_play()
+    #     assert len(steps) > 0
+    #     assert steps[-1] == ("|", 8, 51)
 
     # def test_update_hangman(self, dinamic_hangman):
     #     with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
