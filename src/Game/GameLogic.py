@@ -1,9 +1,9 @@
-from Visualiser.Hangman import Static_Hangman, Dinamic_Hangman
-from Visualiser.Display import Display_Console
-from WorkWithData.Input import Input
-from WorkWithData.Word import Word
-from WorkWithData.Output import OutputsInGameLogics
-from WorkWithData.Utils import Utils
+from src.Visualiser.Hangman import Static_Hangman, Dinamic_Hangman
+from src.Visualiser.Display import DisplayConsole
+from src.WorkWithData.Input import Input
+from src.WorkWithData.Word import Word
+from src.WorkWithData.Output import OutputsInGameLogics
+from src.WorkWithData.Utils import Utils
 
 
 class Game:
@@ -38,7 +38,7 @@ class Game:
         self.play_game()
 
     def play_game(self):
-        new_display = Display_Console(
+        new_display = DisplayConsole(
             self.word,
             Game.guessed_letters,
             Game.input_y,

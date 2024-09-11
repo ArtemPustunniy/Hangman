@@ -1,5 +1,5 @@
 import pytest
-from Visualiser.Hangman import Static_Hangman, Dinamic_Hangman
+from src.Visualiser.Hangman import Static_Hangman, Dinamic_Hangman
 import re
 from unittest.mock import patch
 from io import StringIO

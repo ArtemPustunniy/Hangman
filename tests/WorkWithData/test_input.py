@@ -1,5 +1,5 @@
 import pytest
-from WorkWithData.Input import Input
+from src.WorkWithData.Input import Input
 
 
 class TestInput:

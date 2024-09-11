@@ -1,6 +1,6 @@
 import random
 from collections import Counter
-from WorkWithData.Output import InfoForInput
+from src.WorkWithData.Output import InfoForInput
 
 
 class Word:

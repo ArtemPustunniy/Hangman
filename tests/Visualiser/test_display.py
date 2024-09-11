@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 from io import StringIO
 import re
-from Visualiser.Display import Display_Console
+from src.Visualiser.Display import DisplayConsole
 
 
 def clean_ansi_escape_sequences(text):
@@ -19,7 +19,7 @@ def display_console():
     level = 1
     attempts = 3
     language = 1
-    return Display_Console(
+    return DisplayConsole(
         word, guessed_letters, input_y, category, level, attempts, language
     )
 

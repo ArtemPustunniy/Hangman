@@ -1,9 +1,9 @@
 import sys
 
-from WorkWithData.Output import OutputsInDynamicDisplay
+from src.WorkWithData.Output import OutputsInDynamicDisplay
 
 
-class Display_Console:
+class DisplayConsole:
     def __init__(
         self, word, guessed_letters, input_y, category, level, attempts, language
     ):

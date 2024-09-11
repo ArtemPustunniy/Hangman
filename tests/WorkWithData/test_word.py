@@ -1,5 +1,5 @@
 import pytest
-from WorkWithData.Word import Word
+from src.WorkWithData.Word import Word
 
 
 class TestWord:
