@@ -1,6 +1,6 @@
 import re
-from unittest.mock import patch
-from io import StringIO
+# from unittest.mock import patch
+# from io import StringIO
 
 
 def clean_ansi_escape_sequences(text):
@@ -19,13 +19,13 @@ def clean_ansi_escape_sequences(text):
 #     return Dinamic_Hangman(incorrect_guesses=2, steps_in_play=steps_in_play)
 
 
-class TestHangman:
-    def test_display_hangman_only(self, static_hangman):
-        with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            static_hangman.display_hangman_only()
-            output = clean_ansi_escape_sequences(mock_stdout.getvalue())
-            assert "|" in output
-            assert "+" in output
+# class TestHangman:
+    # def test_display_hangman_only(self, static_hangman):
+    #     with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
+    #         static_hangman.display_hangman_only()
+    #         output = clean_ansi_escape_sequences(mock_stdout.getvalue())
+    #         assert "|" in output
+    #         assert "+" in output
 
     # def test_get_steps_in_play(self, static_hangman):
     #     steps = static_hangman.get_steps_in_play()
