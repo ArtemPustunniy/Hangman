@@ -1,6 +1,6 @@
 import logging
 import platform
-from Game.GameLogic import Play
+from src.Game.GameLogic import Play
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
