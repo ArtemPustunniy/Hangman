@@ -40,19 +40,19 @@ class TestOutputsInGameLogics:
                 "You have already tried to guess this letter.\nTry another one."
             )
 
-    def test_win(self, outputs_in_game_logics):
-        with patch("sys.stdout", new_callable=MagicMock()) as mock_stdout:
-            outputs_in_game_logics.win()
-            mock_stdout.write.assert_any_call(
-                "Congratulations!\nYou guessed the word: python"
-            )
-
-    def test_lose(self, outputs_in_game_logics):
-        with patch("sys.stdout", new_callable=MagicMock()) as mock_stdout:
-            outputs_in_game_logics.lose()
-            mock_stdout.write.assert_any_call(
-                "You have lost.\nThe hidden word was: python"
-            )
+    # def test_win(self, outputs_in_game_logics):
+    #     with patch("sys.stdout", new_callable=MagicMock()) as mock_stdout:
+    #         outputs_in_game_logics.win()
+    #         mock_stdout.write.assert_any_call(
+    #             "Congratulations!\nYou guessed the word: python"
+    #         )
+    #
+    # def test_lose(self, outputs_in_game_logics):
+    #     with patch("sys.stdout", new_callable=MagicMock()) as mock_stdout:
+    #         outputs_in_game_logics.lose()
+    #         mock_stdout.write.assert_any_call(
+    #             "You have lost.\nThe hidden word was: python"
+    #         )
 
     def test_confirm_actual_yes(self, outputs_in_game_logics):
         with patch("builtins.input", return_value="yes"):

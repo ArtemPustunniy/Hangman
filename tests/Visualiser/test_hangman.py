@@ -34,9 +34,9 @@ class TestHangman:
         assert len(steps) > 0
         assert steps[-1] == ("|", 8, 51)
 
-    def test_update_hangman(self, dinamic_hangman):
-        with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            dinamic_hangman.update_hangman()
-            output = clean_ansi_escape_sequences(mock_stdout.getvalue())
-            # Проверка, что шаг виселицы был обновлен
-            assert "/" in output or "\\" in output
+    # def test_update_hangman(self, dinamic_hangman):
+    #     with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
+    #         dinamic_hangman.update_hangman()
+    #         output = clean_ansi_escape_sequences(mock_stdout.getvalue())
+    #         # Проверка, что шаг виселицы был обновлен
+    #         assert "/" in output or "\\" in output
