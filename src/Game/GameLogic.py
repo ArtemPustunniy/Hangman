@@ -4,6 +4,16 @@ from src.WorkWithData.Input import Input
 from src.WorkWithData.Word import Word
 from src.WorkWithData.Output import OutputsInGameLogics
 from src.WorkWithData.Utils import Utils
+# import os
+# print(os.getcwd())
+#
+# from ..Visualiser.Hangman import Static_Hangman, Dinamic_Hangman
+# from ..Visualiser.Display import DisplayConsole
+# from ..WorkWithData.Input import Input
+# from ..WorkWithData.Word import Word
+# from ..WorkWithData.Output import OutputsInGameLogics
+# from ..WorkWithData.Utils import Utils
+
 
 
 class Game:

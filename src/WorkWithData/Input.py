@@ -1,5 +1,8 @@
-from src.WorkWithData.Output import InfoForInput
-from src.WorkWithData.Utils import Utils
+# from src.WorkWithData.Output import InfoForInput
+# from src.WorkWithData.Utils import Utils
+
+from .Output import InfoForInput
+from .Utils import Utils
 
 
 class Input:
