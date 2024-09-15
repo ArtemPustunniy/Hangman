@@ -28,16 +28,17 @@ class Static_Hangman:
         ]
         self.display_hangman_only()
 
-    def display_hangman_only(self):
+    def display_hangman_only(self) -> None:
         for i in range(0, self.part_of_hangman - self.attempts + 1):
             sys.stdout.write(
                 f"\033[{self.hangman_steps[i][1]};{self.hangman_steps[i][2]}H"
             )
             sys.stdout.write(self.hangman_steps[i][0])
+        return
 
-    def get_steps_in_play(self):
-        self.res = len(self.hangman_steps[self.part_of_hangman - self.attempts :])
-        return self.hangman_steps[self.part_of_hangman - self.attempts :]
+    def get_steps_in_play(self) -> list:
+        self.res = len(self.hangman_steps[self.part_of_hangman - self.attempts:])
+        return self.hangman_steps[self.part_of_hangman - self.attempts:]
 
 
 class Dinamic_Hangman:
@@ -45,9 +46,10 @@ class Dinamic_Hangman:
         self.incorrect_guesses = incorrect_guesses
         self.steps_in_play = steps_in_play
 
-    def update_hangman(self):
+    def update_hangman(self) -> None:
         if self.incorrect_guesses < len(self.steps_in_play):
             step = self.steps_in_play[self.incorrect_guesses]
             sys.stdout.write(f"\033[{step[1]};{step[2]}H")
             sys.stdout.write(step[0])
             sys.stdout.flush()
+        return

@@ -8,37 +8,40 @@ class OutputsInGameLogics:
         self.input_y = input_y
         self.actual = ""
 
-    def input_letter(self):
+    def input_letter(self) -> str:
         result = input(
             "\nВведите букву: " if self.language == 2 else "\nInput a letter: "
         ).lower()
         return result
 
-    def warning_about_one_letter(self):
+    def warning_about_one_letter(self) -> None:
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
         sys.stdout.write(
             "Пожалуйста, введите одну букву."
             if self.language == 2
             else "Please, input one letter"
         )
+        return
 
-    def warning_about_same_letter(self):
+    def warning_about_same_letter(self) -> None:
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
         sys.stdout.write(
             "Вы уже угадали эту букву.\nПопробуйте другую."
             if self.language == 2
             else "You have already guessed this letter.\nTry another one."
         )
+        return
 
-    def warning_about_same_used_letter(self):
+    def warning_about_same_used_letter(self) -> None:
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
         sys.stdout.write(
             "Вы уже пытались угадать эту букву.\nПопробуйте другую."
             if self.language == 2
             else "You have already tried to guess this letter.\nTry another one."
         )
+        return
 
-    def win(self):
+    def win(self) -> None:
         if self.language == 2:
             sys.stdout.write(f"\033[{self.input_y + 2};0H")
             sys.stdout.write(
@@ -49,8 +52,9 @@ class OutputsInGameLogics:
             sys.stdout.write(
                 f"\033[{self.input_y + 2};0HCongratulations!\nYou guessed the word: {self.word}"
             )
+        return
 
-    def lose(self):
+    def lose(self) -> None:
         if self.language == 2:
             sys.stdout.write(f"\033[{self.input_y + 2};0H")
             sys.stdout.write(
@@ -61,8 +65,9 @@ class OutputsInGameLogics:
             sys.stdout.write(
                 f"\033[{self.input_y + 2};0HYou have lost.\nThe hidden word was: {self.word}"
             )
+        return
 
-    def confirm_actual(self):
+    def confirm_actual(self) -> bool:
         sys.stdout.write(f"\033[{self.input_y + 4};0H")
         vvod = input(
             "Хотите ли вы начать новую игру? Введите Да/Нет "
@@ -77,14 +82,16 @@ class OutputsInGameLogics:
 
 
 class OutputsInDynamicDisplay:
-    def __init__(self, language, category, level, attempts, input_y):
+    def __init__(self, language, category, level, attempts, input_y, has_hint, hint):
         self.language = language
         self.category = category
         self.level = level
         self.attempts = attempts
         self.input_y = input_y
+        self.has_hint = has_hint
+        self.hint = hint
 
-    def output_game_info(self):
+    def output_game_info(self) -> None:
         sys.stdout.write("\033[1;0H")
         sys.stdout.write(
             "Игра началась, дерзайте!"
@@ -111,17 +118,33 @@ class OutputsInDynamicDisplay:
         )
         sys.stdout.write("\033[6;0H")
         sys.stdout.write("Язык: Русский" if self.language == 2 else "Language: English")
+
+        if self.has_hint:
+            RED = "\033[33m"
+            RESET = "\033[0m"
+
+            sys.stdout.write("\033[8;0H")
+            sys.stdout.write(
+                RED + (
+                    f"Подсказка: {self.hint}"
+                    if self.language == 2
+                    else f"Hint: {self.hint}"
+                ) + RESET
+            )
+
         sys.stdout.write(f"\033[{self.input_y};0H")
         sys.stdout.write(" " * 50)
         sys.stdout.write(f"\033[{self.input_y};0H")
         sys.stdout.write("Слово: " if self.language == 2 else "Word: ")
+
+        return
 
 
 class InfoForInput:
     def __init__(self, language):
         self.language = language
 
-    def language_info(self):
+    def language_info(self) -> int:
         result = int(
             input(
                 "Choose your language:\n"
@@ -133,10 +156,11 @@ class InfoForInput:
         self.language = result
         return result
 
-    def warning_unavailable_language_number(self):
+    def warning_unavailable_language_number(self) -> None:
         print("Please enter an available language number\n")
+        return
 
-    def category_index_info(self):
+    def category_index_info(self) -> int:
         result = int(
             input(
                 "Доступные категории слов: \n"
@@ -158,14 +182,15 @@ class InfoForInput:
         )
         return result
 
-    def warning_unavailable_category_number(self):
+    def warning_unavailable_category_number(self) -> None:
         print(
             "Пожалуйста, введите доступный номер категории"
             if self.language == 2
             else "Please enter an available category number"
         )
+        return
 
-    def level_info(self):
+    def level_info(self) -> int:
         result = int(
             input(
                 "Доступные уровни сложности: \n"
@@ -185,14 +210,15 @@ class InfoForInput:
         )
         return result
 
-    def warning_unavailable_level_number(self):
+    def warning_unavailable_level_number(self) -> None:
         print(
             "Пожалуйста, введите доступный уровень сложности"
             if self.language == 2
             else "Please enter the available difficulty level"
         )
+        return
 
-    def attempts_info(self):
+    def attempts_info(self) -> int:
         result = int(
             input(
                 "Введите максимальное число ошибок (от 2 до 17) "
@@ -202,14 +228,36 @@ class InfoForInput:
         )
         return result
 
-    def warning_unavailable_attempts_number(self):
+    def warning_unavailable_attempts_number(self) -> None:
         print(
             "Пожалуйста введите допустимое число попыток"
             if self.language == 2
             else "Please enter the allowed number of attempts"
         )
 
+    def hints_info(self) -> int:
+        result = int(
+            input(
+                "Введите число ошибок, совершённых подряд, после которого нужно вывести подсказку:\n"
+                "Если подсказки нужны, то введите число от единицы до выбранного Вами числа попыток)\n"
+                "Если подсказки не нужны, введите -1\n"
+                if self.language == 2
+                else "Enter the number of errors made in a row after which you want to display a hint:\n"
+                "If you need hints, then enter a number from one to the number of attempts you have chosen)\n"
+                "If prompts are not needed, enter -1\n"
+            )
+        )
+        return result
+
+    def warning_unavailable_hints_number(self) -> None:
+        print(
+            "Пожалуйста введите допустимое число ошибок"
+            if self.language == 2
+            else "Please enter the allowed number of errors"
+        )
+
     @classmethod
-    def error_log(self):
-        with open("Logs/logs.txt", "a") as log_file:
-            log_file.write("Неверный ввод\n")
+    def error_log(cls) -> None:
+        with open("src/Logs/logs.txt", "a") as log_file:
+            log_file.write("Invalid input\n")
+        return

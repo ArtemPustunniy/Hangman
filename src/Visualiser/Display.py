@@ -5,8 +5,7 @@ from src.WorkWithData.Output import OutputsInDynamicDisplay
 
 class DisplayConsole:
     def __init__(
-        self, word, guessed_letters, input_y, category, level, attempts, language
-    ):
+            self, word, guessed_letters, input_y, category, level, attempts, language):
         self.word = word
         self.guessed_letters = guessed_letters
         self.input_y = input_y
@@ -14,13 +13,15 @@ class DisplayConsole:
         self.category = category
         self.level = level
         self.language = language
+        self.has_hint = False
+        self.hint = ''
 
         self.display_word_state()
 
-    def display_word_state(self):
+    def display_word_state(self) -> None:
         OutputsInDynamicDisplay(
-            self.language, self.category, self.level, self.attempts, self.input_y
-        ).output_game_info()
+            self.language, self.category, self.level, self.attempts, self.input_y,
+            self.has_hint, self.hint).output_game_info()
         for letter in self.word:
             if letter in self.guessed_letters:
                 sys.stdout.write(f"{letter} ")
@@ -76,11 +77,17 @@ class DisplayConsole:
         sys.stdout.write(f"\033[{self.input_y};0H")
 
         sys.stdout.flush()
+        return
 
-    def clear_for_conclusion(self):
+    def clear_for_conclusion(self) -> None:
         for i in range(0, 300, 1):
             sys.stdout.write(f"\033[{self.input_y + 2};{i}H")
             sys.stdout.write(" ")
         for i in range(0, 300, 1):
             sys.stdout.write(f"\033[{self.input_y + 3};{i}H")
             sys.stdout.write(" ")
+        return
+
+    def change_has_hint(self) -> None:
+        self.has_hint = True
+        return
