@@ -11,7 +11,7 @@ def outputs_in_game_logics():
 @pytest.fixture
 def outputs_in_dynamic_display():
     return OutputsInDynamicDisplay(
-        language=1, category="Animals", level=2, attempts=5, input_y=10
+        language=1, category="Animals", level=2, attempts=5, input_y=10, has_hint=False, hint='hint'
     )
 
 
