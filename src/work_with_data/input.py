@@ -1,5 +1,7 @@
 from .output import InfoForInput
 from .utils import Utils
+from .word import LevelIndex, LanguageIndex, CategoryIndex
+from src.visualiser.hangman import StaticHangman
 
 
 class Input:
@@ -11,10 +13,10 @@ class Input:
         self.hints = 0
         self.info_input = InfoForInput(0)
 
-        self.input_value('language', 1, 2, self.info_input.language_info, self.info_input.warning_unavailable_language_number)
-        self.input_value('category_index', 1, 5, self.info_input.category_index_info, self.info_input.warning_unavailable_category_number)
-        self.input_value('level_index', 1, 4, self.info_input.level_info, self.info_input.warning_unavailable_level_number)
-        self.input_value('attempts', 2, 17, self.info_input.attempts_info, self.info_input.warning_unavailable_attempts_number)
+        self.input_value('language', LanguageIndex.ENGLISH.value, LanguageIndex.RUSSIAN.value, self.info_input.language_info, self.info_input.warning_unavailable_language_number)
+        self.input_value('category_index', list(CategoryIndex)[0].value, list(CategoryIndex)[-1].value, self.info_input.category_index_info, self.info_input.warning_unavailable_category_number)
+        self.input_value('level_index', list(LevelIndex)[0].value, list(LevelIndex)[-1].value, self.info_input.level_info, self.info_input.warning_unavailable_level_number)
+        self.input_value('attempts', 2, StaticHangman.get_hangman_steps(), self.info_input.attempts_info, self.info_input.warning_unavailable_attempts_number)
         self.input_value('hints', 1, self.attempts, self.info_input.hints_info, self.info_input.warning_unavailable_hints_number, special_condition=True)
 
     def input_value(self, attr_name, min_value, max_value, info_method, warning_method, special_condition=False) -> None:

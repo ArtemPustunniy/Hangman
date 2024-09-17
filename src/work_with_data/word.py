@@ -1,6 +1,27 @@
 import random
 from collections import Counter
+from enum import Enum
+
 from .output import InfoForInput
+
+
+class LanguageIndex(Enum):
+    ENGLISH = 1
+    RUSSIAN = 2
+
+
+class LevelIndex(Enum):
+    EASY = 1
+    MEDIUM = 2
+    HARD = 3
+    RANDOM = 4
+
+
+class CategoryIndex(Enum):
+    ANIMALS = 1
+    TOYS = 2
+    VEGETABLES = 3
+    FRUIT = 4
 
 
 class Word:

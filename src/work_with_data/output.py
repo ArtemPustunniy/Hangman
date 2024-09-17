@@ -142,7 +142,6 @@ class OutputsInDynamicDisplay:
         sys.stdout.write("Слово: " if self.language == 2 else "Word: ")
 
 
-
 class InfoForInput:
     def __init__(self, language):
         self.language = language
@@ -161,7 +160,6 @@ class InfoForInput:
 
     def warning_unavailable_language_number(self) -> None:
         print("Please enter an available language number\n")
-        return
 
     def category_index_info(self) -> int:
         result = int(
@@ -191,7 +189,6 @@ class InfoForInput:
             if self.language == 2
             else "Please enter an available category number"
         )
-        return
 
     def level_info(self) -> int:
         result = int(
@@ -261,5 +258,3 @@ class InfoForInput:
     @classmethod
     def error_log(cls) -> None:
         logger.exception('Invalid input')
-        # with open("src/logs/logs.log", "a") as log_file:
-        #     log_file.write("Invalid input\n")
