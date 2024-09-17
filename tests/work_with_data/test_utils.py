@@ -1,4 +1,4 @@
-from src.WorkWithData.Utils import Utils
+from src.work_with_data.utils import Utils
 
 
 class TestUtils:

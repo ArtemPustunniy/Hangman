@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 from io import StringIO
 import re
-from src.Visualiser.Display import DisplayConsole
+from src.visualiser.display import DisplayConsole
 
 
 def clean_ansi_escape_sequences(text):

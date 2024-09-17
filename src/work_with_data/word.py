@@ -1,6 +1,6 @@
 import random
 from collections import Counter
-from .Output import InfoForInput
+from .output import InfoForInput
 
 
 class Word:
@@ -504,8 +504,6 @@ class Word:
         self.level_index = level_index
         self.category = ""
 
-        # print(self.category_index)
-
         if self.language == 1:
             try:
                 if self.category_index == 5:
@@ -556,7 +554,6 @@ class Word:
             else:
                 raise ValueError
         self.final_word = random.choice(self.__result)
-        return
 
     def get_hint(self) -> str:
         if self.language == 1:

@@ -1,13 +1,12 @@
-from src.Visualiser.Hangman import Static_Hangman, Dinamic_Hangman
-from src.Visualiser.Display import DisplayConsole
-from src.WorkWithData.Input import Input
-from src.WorkWithData.Word import Word
-from src.WorkWithData.Output import OutputsInGameLogics
-from src.WorkWithData.Utils import Utils
+from src.visualiser.hangman import StaticHangman, DinamicHangman
+from src.visualiser.display import DisplayConsole
+from src.work_with_data.input import Input
+from src.work_with_data.word import Word
+from src.work_with_data.output import OutputsInGameLogics
+from src.work_with_data.utils import Utils
 
 
 class Game:
-    # attempts = 6
     parts_of_hangman = 17
     steps_in_play = ""
     guessed_letters = set()
@@ -20,7 +19,7 @@ class Game:
         language,
         category_index,
         level_index,
-        actual,
+        is_actual,
         attempts,
         max_hints,
     ):
@@ -33,7 +32,7 @@ class Game:
         self.word = self.new_word.final_word
         self.category = self.new_word.category
         self.level = self.new_word.level
-        self.actual = actual
+        self.is_actual = is_actual
         self.attempts = attempts
         self.errors_step_by_step = 0
         self.max_hints = max_hints
@@ -50,10 +49,10 @@ class Game:
             self.attempts,
             self.language,
         )
-        steps_in_play = Static_Hangman(
+        steps_in_play = StaticHangman(
             Game.parts_of_hangman, self.attempts
         ).get_steps_in_play()
-        new_dinamic_hangman = Dinamic_Hangman(Game.incorrect_guesses, steps_in_play)
+        new_dinamic_hangman = DinamicHangman(Game.incorrect_guesses, steps_in_play)
         game_output = OutputsInGameLogics(self.language, self.word, self.input_y)
 
         while new_dinamic_hangman.incorrect_guesses < len(steps_in_play) - 1:
@@ -96,8 +95,7 @@ class Game:
             new_display.clear_for_conclusion()
             game_output.lose()
 
-        self.actual = game_output.confirm_actual()
-        return
+        self.is_actual = game_output.confirm_actual()
 
     def clear(self) -> None:
         self.attempts = 6
@@ -107,12 +105,11 @@ class Game:
         Game.used_letters = set()
         Game.incorrect_guesses = 0
         Game.input_y = 11
-        return
 
 
 class Play:
     def __init__(self):
-        self.actual = True
+        self.is_actual = True
 
     def start_game(self) -> None:
         while True:
@@ -121,16 +118,14 @@ class Play:
                 _input.language,
                 _input.category_index,
                 _input.level_index,
-                self.actual,
+                self.is_actual,
                 _input.attempts,
                 _input.hints
             )
-            if not new_game.actual:
+            if not new_game.is_actual:
                 break
             else:
                 new_game.clear()
-                # del new_word
                 del _input
                 del new_game
                 Utils.clear_console()
-        return

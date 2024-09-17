@@ -1,4 +1,13 @@
 import sys
+import logging
+
+
+logging.basicConfig(filename='src/logs/logs.log',  # Имя файла для записи логов
+                    filemode='w',  # Перезаписывать файл каждый раз (можно использовать 'a' для добавления)
+                    format='%(asctime)s - %(levelname)s - %(message)s',  # Формат логов
+                    level=logging.INFO)  # Уровень логирования
+logging.getLogger().setLevel(logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class OutputsInGameLogics:
@@ -21,7 +30,6 @@ class OutputsInGameLogics:
             if self.language == 2
             else "Please, input one letter"
         )
-        return
 
     def warning_about_same_letter(self) -> None:
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
@@ -30,7 +38,6 @@ class OutputsInGameLogics:
             if self.language == 2
             else "You have already guessed this letter.\nTry another one."
         )
-        return
 
     def warning_about_same_used_letter(self) -> None:
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
@@ -39,7 +46,6 @@ class OutputsInGameLogics:
             if self.language == 2
             else "You have already tried to guess this letter.\nTry another one."
         )
-        return
 
     def win(self) -> None:
         if self.language == 2:
@@ -52,7 +58,6 @@ class OutputsInGameLogics:
             sys.stdout.write(
                 f"\033[{self.input_y + 2};0HCongratulations!\nYou guessed the word: {self.word}"
             )
-        return
 
     def lose(self) -> None:
         if self.language == 2:
@@ -65,7 +70,6 @@ class OutputsInGameLogics:
             sys.stdout.write(
                 f"\033[{self.input_y + 2};0HYou have lost.\nThe hidden word was: {self.word}"
             )
-        return
 
     def confirm_actual(self) -> bool:
         sys.stdout.write(f"\033[{self.input_y + 4};0H")
@@ -137,7 +141,6 @@ class OutputsInDynamicDisplay:
         sys.stdout.write(f"\033[{self.input_y};0H")
         sys.stdout.write("Слово: " if self.language == 2 else "Word: ")
 
-        return
 
 
 class InfoForInput:
@@ -216,7 +219,6 @@ class InfoForInput:
             if self.language == 2
             else "Please enter the available difficulty level"
         )
-        return
 
     def attempts_info(self) -> int:
         result = int(
@@ -258,6 +260,6 @@ class InfoForInput:
 
     @classmethod
     def error_log(cls) -> None:
-        with open("src/Logs/logs.txt", "a") as log_file:
-            log_file.write("Invalid input\n")
-        return
+        logger.exception('Invalid input')
+        # with open("src/logs/logs.log", "a") as log_file:
+        #     log_file.write("Invalid input\n")

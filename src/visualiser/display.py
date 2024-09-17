@@ -1,6 +1,6 @@
 import sys
 
-from src.WorkWithData.Output import OutputsInDynamicDisplay
+from src.work_with_data.output import OutputsInDynamicDisplay
 
 
 class DisplayConsole:
@@ -36,48 +36,18 @@ class DisplayConsole:
                 sys.stdout.write(f"\033[{self.input_y + 1};{i}H")
                 sys.stdout.write(" ")
 
-        sys.stdout.write("\033[12;48H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;49H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;50H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;51H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;52H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;53H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;54H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;55H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[12;56H")
-        sys.stdout.write("-" + "")
+        # Вывод основания виселицы
+        for i in range(48, 56, 1):
+            sys.stdout.write(f"\033[12;{i}H")
+            sys.stdout.write("-" + "")
 
-        sys.stdout.write("\033[13;48H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;49H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;50H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;51H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;52H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;53H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;54H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;55H")
-        sys.stdout.write("-" + "")
-        sys.stdout.write("\033[13;56H")
-        sys.stdout.write("-" + "")
+        for i in range(48, 56, 1):
+            sys.stdout.write(f"\033[13;{i}H")
+            sys.stdout.write("-" + "")
 
         sys.stdout.write(f"\033[{self.input_y};0H")
 
         sys.stdout.flush()
-        return
 
     def clear_for_conclusion(self) -> None:
         for i in range(0, 300, 1):
@@ -86,8 +56,6 @@ class DisplayConsole:
         for i in range(0, 300, 1):
             sys.stdout.write(f"\033[{self.input_y + 3};{i}H")
             sys.stdout.write(" ")
-        return
 
     def change_has_hint(self) -> None:
         self.has_hint = True
-        return

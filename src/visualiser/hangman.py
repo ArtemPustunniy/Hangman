@@ -1,7 +1,7 @@
 import sys
 
 
-class Static_Hangman:
+class StaticHangman:
     def __init__(self, part_of_hangman, attempts):
         self.part_of_hangman = part_of_hangman
         self.attempts = attempts
@@ -34,14 +34,13 @@ class Static_Hangman:
                 f"\033[{self.hangman_steps[i][1]};{self.hangman_steps[i][2]}H"
             )
             sys.stdout.write(self.hangman_steps[i][0])
-        return
 
     def get_steps_in_play(self) -> list:
         self.res = len(self.hangman_steps[self.part_of_hangman - self.attempts:])
         return self.hangman_steps[self.part_of_hangman - self.attempts:]
 
 
-class Dinamic_Hangman:
+class DinamicHangman:
     def __init__(self, incorrect_guesses, steps_in_play):
         self.incorrect_guesses = incorrect_guesses
         self.steps_in_play = steps_in_play
@@ -52,4 +51,3 @@ class Dinamic_Hangman:
             sys.stdout.write(f"\033[{step[1]};{step[2]}H")
             sys.stdout.write(step[0])
             sys.stdout.flush()
-        return

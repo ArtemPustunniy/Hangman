@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from src.WorkWithData.Output import OutputsInGameLogics, OutputsInDynamicDisplay
+from src.work_with_data.output import OutputsInGameLogics, OutputsInDynamicDisplay
 
 
 @pytest.fixture
