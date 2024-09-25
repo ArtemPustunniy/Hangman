@@ -45,7 +45,7 @@ class StaticHangman:
         return len(StaticHangman._hangman_steps)
 
 
-class DinamicHangman:
+class DynamicHangman:
     def __init__(self, incorrect_guesses, steps_in_play):
         self.incorrect_guesses = incorrect_guesses
         self.steps_in_play = steps_in_play

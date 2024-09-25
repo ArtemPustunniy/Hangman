@@ -1,9 +1,10 @@
-from src.visualiser.hangman import StaticHangman, DinamicHangman
+from src.visualiser.hangman import StaticHangman, DynamicHangman
 from src.visualiser.display import DisplayConsole
 from src.work_with_data.input import Input
 from src.work_with_data.word import Word
 from src.work_with_data.output import OutputsInGameLogics
 from src.work_with_data.utils import Utils
+from src.work_with_data.reader import Reader
 
 
 class Game:
@@ -38,9 +39,7 @@ class Game:
         self.incorrect_guesses = 0
         self.input_y = 11
 
-        self.play_game()
-
-    def play_game(self) -> None:
+    def render_game_board(self) -> None:
         new_display = DisplayConsole(
             self.word,
             self.guessed_letters,
@@ -53,7 +52,7 @@ class Game:
         steps_in_play = StaticHangman(
             self.parts_of_hangman, self.attempts
         ).get_steps_in_play()
-        new_dinamic_hangman = DinamicHangman(self.incorrect_guesses, steps_in_play)
+        new_dinamic_hangman = DynamicHangman(self.incorrect_guesses, steps_in_play)
         game_output = OutputsInGameLogics(self.language, self.word, self.input_y)
 
         while new_dinamic_hangman.incorrect_guesses < len(steps_in_play) - 1:
@@ -114,7 +113,7 @@ class Play:
 
     def start_game(self) -> None:
         while True:
-            _input = Input()
+            _input = Reader.fill_input()
             new_game = Game(
                 _input.language,
                 _input.category_index,
@@ -123,6 +122,7 @@ class Play:
                 _input.attempts,
                 _input.hints
             )
+            new_game.render_game_board()
             if not new_game.is_actual:
                 break
             else:

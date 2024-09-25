@@ -1,6 +1,4 @@
 import re
-# from unittest.mock import patch
-# from io import StringIO
 
 
 def clean_ansi_escape_sequences(text):

@@ -1,3 +1,4 @@
+import enum
 import random
 from collections import Counter
 from enum import Enum
@@ -5,23 +6,23 @@ from enum import Enum
 from .output import InfoForInput
 
 
-class LanguageIndex(Enum):
-    ENGLISH = 1
-    RUSSIAN = 2
+class Language(Enum):
+    ENGLISH = enum.auto()
+    RUSSIAN = enum.auto()
 
 
-class LevelIndex(Enum):
-    EASY = 1
-    MEDIUM = 2
-    HARD = 3
-    RANDOM = 4
+class Level(Enum):
+    EASY = enum.auto()
+    MEDIUM = enum.auto()
+    HARD = enum.auto()
+    RANDOM = enum.auto()
 
 
-class CategoryIndex(Enum):
-    ANIMALS = 1
-    TOYS = 2
-    VEGETABLES = 3
-    FRUIT = 4
+class Category(Enum):
+    ANIMALS = enum.auto()
+    TOYS = enum.auto()
+    VEGETABLES = enum.auto()
+    FRUIT = enum.auto()
 
 
 class Word:
