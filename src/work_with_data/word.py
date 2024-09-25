@@ -7,11 +7,27 @@ from .output import InfoForInput
 
 
 class Language(Enum):
+    """
+        Перечисление языков игры.
+
+        Значения:
+            ENGLISH: английский язык.
+            RUSSIAN: русский язык.
+        """
     ENGLISH = enum.auto()
     RUSSIAN = enum.auto()
 
 
 class Level(Enum):
+    """
+        Перечисление уровней сложности игры.
+
+        Значения:
+            EASY: легкий уровень.
+            MEDIUM: средний уровень.
+            HARD: сложный уровень.
+            RANDOM: случайный выбор уровня.
+        """
     EASY = enum.auto()
     MEDIUM = enum.auto()
     HARD = enum.auto()
@@ -19,13 +35,38 @@ class Level(Enum):
 
 
 class Category(Enum):
+    """
+        Перечисление категорий слов для игры.
+
+        Значения:
+            ANIMALS: категория "Животные".
+            TOYS: категория "Игрушки".
+            VEGETABLES: категория "Овощи".
+            FRUIT: категория "Фрукты".
+            RANDOM: случайный выбор категории.
+        """
     ANIMALS = enum.auto()
     TOYS = enum.auto()
     VEGETABLES = enum.auto()
     FRUIT = enum.auto()
+    RANDOM = enum.auto()
 
 
 class Word:
+    """
+        Класс для работы с выбором слов и подсказок для игры.
+
+        Атрибуты:
+            list_category (list): Список категорий слов на английском языке.
+            list_level (list): Список уровней сложности на английском языке.
+            dict_words (dict): Словарь слов по категориям на английском языке.
+            list_category_in_Russian (list): Список категорий слов на русском языке.
+            list_level_in_Russian (list): Список уровней сложности на русском языке.
+            dict_words_in_Russian (dict): Словарь слов по категориям на русском языке.
+            dict_hints (dict): Словарь подсказок для слов на английском языке.
+            dict_hints_in_Russian (dict): Словарь подсказок для слов на русском языке.
+        """
+
     list_category = ["animals", "toys", "vegetables", "fruit", "random"]
     list_level = ["easy", "medium", "hard", "random"]
 
@@ -516,14 +557,23 @@ class Word:
         ],
     }
 
-    def __init__(self, language, category_index, level_index):
+    def __init__(self, language: int, category_index: int, level_index: int):
+        """
+                Инициализирует объект Word с выбором языка, категории и уровня сложности.
+
+                Параметры:
+                    language (int): Выбранный язык (1 - English, 2 - Русский).
+                    category_index (int): Индекс выбранной категории.
+                    level_index (int): Индекс выбранного уровня сложности.
+                """
+
         self.language = language
         self.strings = ""
-        self.level = ""
         self.__result = []
         self.final_word = ""
         self.category_index = category_index
         self.level_index = level_index
+        self.level = ""
         self.category = ""
 
         if self.language == 1:
@@ -550,6 +600,11 @@ class Word:
         self.select_strings_by_difficulty()
 
     def select_strings_by_difficulty(self) -> None:
+        """
+                Выбирает слова в зависимости от выбранного уровня сложности.
+
+                Слова фильтруются по длине и количеству повторяющихся символов в зависимости от уровня.
+                """
         for string in (
             self.dict_words[self.category]
             if self.language == 1
@@ -578,6 +633,12 @@ class Word:
         self.final_word = random.choice(self.__result)
 
     def get_hint(self) -> str:
+        """
+                Возвращает подсказку для текущего слова.
+
+                Возвращает:
+                    str: Подсказка для выбранного слова.
+                """
         if self.language == 1:
             try:
                 result = self.dict_hints[self.category][self.dict_words[self.category].index(self.final_word)]

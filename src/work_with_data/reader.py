@@ -6,6 +6,8 @@ from .input import Input
 
 
 class Reader:
+    MIN_ATTEMPTS = 2
+
     @staticmethod
     def fill_input():
         info_input = InfoForInput(0)
@@ -37,7 +39,7 @@ class Reader:
 
     @staticmethod
     def input_attempts(info_input):
-        return Reader.input_value('attempts', 2, StaticHangman.get_hangman_steps(),
+        return Reader.input_value('attempts', Reader.MIN_ATTEMPTS, StaticHangman.get_hangman_steps(),
                                   info_input.attempts_info, info_input.warning_unavailable_attempts_number)
 
     @staticmethod

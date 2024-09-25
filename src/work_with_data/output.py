@@ -1,7 +1,7 @@
 import sys
 import logging
 
-
+# Настройка логирования
 logging.basicConfig(filename='src/logs/logs.log',  # Имя файла для записи логов
                     filemode='w',  # Перезаписывать файл каждый раз (можно использовать 'a' для добавления)
                     format='%(asctime)s - %(levelname)s - %(message)s',  # Формат логов
@@ -11,19 +11,46 @@ logger = logging.getLogger(__name__)
 
 
 class OutputsInGameLogics:
-    def __init__(self, language, word, input_y):
+    """
+    Класс, который управляет выводом сообщений и логикой ввода в процессе игры.
+
+    Атрибуты:
+        language (int): Язык игры (1 - English, 2 - Русский).
+        word (str): Загаданное слово.
+        input_y (int): Позиция для отображения текста на экране.
+        actual (str): Переменная для хранения статуса актуальности игры.
+    """
+
+    def __init__(self, language: int, word: str, input_y: int):
+        """
+        Инициализирует объект для управления выводом и вводом.
+
+        Параметры:
+            language (int): Язык игры.
+            word (str): Загаданное слово.
+            input_y (int): Позиция для отображения текста на экране.
+        """
         self.language = language
         self.word = word
         self.input_y = input_y
         self.actual = ""
 
     def input_letter(self) -> str:
+        """
+        Ввод буквы пользователем.
+
+        Возвращает:
+            str: Введенная буква в нижнем регистре.
+        """
         result = input(
             "\nВведите букву: " if self.language == 2 else "\nInput a letter: "
         ).lower()
         return result
 
     def warning_about_one_letter(self) -> None:
+        """
+        Вывод предупреждения, если пользователь вводит больше одной буквы.
+        """
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
         sys.stdout.write(
             "Пожалуйста, введите одну букву."
@@ -32,6 +59,9 @@ class OutputsInGameLogics:
         )
 
     def warning_about_same_letter(self) -> None:
+        """
+        Вывод предупреждения, если пользователь пытается ввести уже угаданную букву.
+        """
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
         sys.stdout.write(
             "Вы уже угадали эту букву.\nПопробуйте другую."
@@ -40,6 +70,9 @@ class OutputsInGameLogics:
         )
 
     def warning_about_same_used_letter(self) -> None:
+        """
+        Вывод предупреждения, если пользователь пытается ввести букву, которую уже пробовал угадать.
+        """
         sys.stdout.write(f"\033[{self.input_y + 2};0H")
         sys.stdout.write(
             "Вы уже пытались угадать эту букву.\nПопробуйте другую."
@@ -48,30 +81,32 @@ class OutputsInGameLogics:
         )
 
     def win(self) -> None:
+        """
+        Вывод сообщения о победе, если игрок угадал слово.
+        """
+        sys.stdout.write(f"\033[{self.input_y + 2};0H")
         if self.language == 2:
-            sys.stdout.write(f"\033[{self.input_y + 2};0H")
-            sys.stdout.write(
-                f"\033[{self.input_y + 2};0HПоздравляем!\nВы угадали слово: {self.word}"
-            )
+            sys.stdout.write(f"Поздравляем!\nВы угадали слово: {self.word}")
         else:
-            sys.stdout.write(f"\033[{self.input_y + 2};0H")
-            sys.stdout.write(
-                f"\033[{self.input_y + 2};0HCongratulations!\nYou guessed the word: {self.word}"
-            )
+            sys.stdout.write(f"Congratulations!\nYou guessed the word: {self.word}")
 
     def lose(self) -> None:
+        """
+        Вывод сообщения о поражении, если игрок не смог угадать слово.
+        """
+        sys.stdout.write(f"\033[{self.input_y + 2};0H")
         if self.language == 2:
-            sys.stdout.write(f"\033[{self.input_y + 2};0H")
-            sys.stdout.write(
-                f"\033[{self.input_y + 2};0HВы проиграли.\nЗагаданное слово было: {self.word}"
-            )
+            sys.stdout.write(f"Вы проиграли.\nЗагаданное слово было: {self.word}")
         else:
-            sys.stdout.write(f"\033[{self.input_y + 2};0H")
-            sys.stdout.write(
-                f"\033[{self.input_y + 2};0HYou have lost.\nThe hidden word was: {self.word}"
-            )
+            sys.stdout.write(f"You have lost.\nThe hidden word was: {self.word}")
 
     def confirm_actual(self) -> bool:
+        """
+        Спрашивает у пользователя, хочет ли он начать новую игру.
+
+        Возвращает:
+            bool: True, если пользователь хочет продолжить, False — если нет.
+        """
         sys.stdout.write(f"\033[{self.input_y + 4};0H")
         vvod = input(
             "Хотите ли вы начать новую игру? Введите Да/Нет "
@@ -86,7 +121,32 @@ class OutputsInGameLogics:
 
 
 class OutputsInDynamicDisplay:
-    def __init__(self, language, category, level, attempts, input_y, has_hint, hint):
+    """
+    Класс для вывода информации о ходе игры на динамическом экране.
+
+    Атрибуты:
+        language (int): Язык игры.
+        category (str): Категория выбранных слов.
+        level (str): Уровень сложности игры.
+        attempts (int): Количество оставшихся попыток.
+        input_y (int): Позиция для отображения текста на экране.
+        has_hint (bool): Указатель на то, доступна ли подсказка.
+        hint (str): Подсказка для слова.
+    """
+
+    def __init__(self, language: int, category: str, level: str, attempts: int, input_y: int, has_hint: bool, hint: str):
+        """
+        Инициализирует объект для динамического вывода информации.
+
+        Параметры:
+            language (int): Язык игры.
+            category (str): Категория слов.
+            level (str): Уровень сложности.
+            attempts (int): Количество оставшихся попыток.
+            input_y (int): Позиция для вывода текста на экране.
+            has_hint (bool): Доступна ли подсказка.
+            hint (str): Подсказка для текущего слова.
+        """
         self.language = language
         self.category = category
         self.level = level
@@ -96,6 +156,9 @@ class OutputsInDynamicDisplay:
         self.hint = hint
 
     def output_game_info(self) -> None:
+        """
+        Выводит информацию о текущем состоянии игры, включая категорию, уровень сложности и количество попыток.
+        """
         sys.stdout.write("\033[1;0H")
         sys.stdout.write(
             "Игра началась, дерзайте!"
@@ -143,10 +206,29 @@ class OutputsInDynamicDisplay:
 
 
 class InfoForInput:
-    def __init__(self, language):
+    """
+    Класс для обработки пользовательского ввода и информации о настройках игры.
+
+    Атрибуты:
+        language (int): Язык игры.
+    """
+
+    def __init__(self, language: int):
+        """
+        Инициализирует объект с информацией о выбранном языке игры.
+
+        Параметры:
+            language (int): Язык игры.
+        """
         self.language = language
 
     def language_info(self) -> int:
+        """
+        Выводит запрос на выбор языка и возвращает выбор пользователя.
+
+        Возвращает:
+            int: Выбранный язык (1 - English, 2 - Русский).
+        """
         result = int(
             input(
                 "Choose your language:\n"
@@ -159,9 +241,18 @@ class InfoForInput:
         return result
 
     def warning_unavailable_language_number(self) -> None:
+        """
+        Выводит предупреждение о необходимости ввода допустимого номера языка.
+        """
         print("Please enter an available language number\n")
 
     def category_index_info(self) -> int:
+        """
+        Запрашивает выбор категории слов и возвращает индекс выбранной категории.
+
+        Возвращает:
+            int: Индекс выбранной категории.
+        """
         result = int(
             input(
                 "Доступные категории слов: \n"
@@ -184,6 +275,9 @@ class InfoForInput:
         return result
 
     def warning_unavailable_category_number(self) -> None:
+        """
+        Выводит предупреждение о необходимости ввода допустимого номера категории.
+        """
         print(
             "Пожалуйста, введите доступный номер категории"
             if self.language == 2
@@ -191,6 +285,12 @@ class InfoForInput:
         )
 
     def level_info(self) -> int:
+        """
+        Запрашивает выбор уровня сложности и возвращает индекс выбранного уровня.
+
+        Возвращает:
+            int: Индекс выбранного уровня сложности.
+        """
         result = int(
             input(
                 "Доступные уровни сложности: \n"
@@ -211,6 +311,9 @@ class InfoForInput:
         return result
 
     def warning_unavailable_level_number(self) -> None:
+        """
+        Выводит предупреждение о необходимости ввода допустимого уровня сложности.
+        """
         print(
             "Пожалуйста, введите доступный уровень сложности"
             if self.language == 2
@@ -218,6 +321,12 @@ class InfoForInput:
         )
 
     def attempts_info(self) -> int:
+        """
+        Запрашивает максимальное количество ошибок и возвращает введенное значение.
+
+        Возвращает:
+            int: Максимальное количество ошибок.
+        """
         result = int(
             input(
                 "Введите максимальное число ошибок (от 2 до 17) "
@@ -228,6 +337,9 @@ class InfoForInput:
         return result
 
     def warning_unavailable_attempts_number(self) -> None:
+        """
+        Выводит предупреждение о необходимости ввода допустимого количества ошибок.
+        """
         print(
             "Пожалуйста введите допустимое число попыток"
             if self.language == 2
@@ -235,6 +347,12 @@ class InfoForInput:
         )
 
     def hints_info(self) -> int:
+        """
+        Запрашивает количество ошибок для отображения подсказки и возвращает введенное значение.
+
+        Возвращает:
+            int: Количество ошибок для отображения подсказки.
+        """
         result = int(
             input(
                 "Введите число ошибок, совершённых подряд, после которого нужно вывести подсказку:\n"
@@ -249,6 +367,9 @@ class InfoForInput:
         return result
 
     def warning_unavailable_hints_number(self) -> None:
+        """
+        Выводит предупреждение о необходимости ввода допустимого числа ошибок для отображения подсказки.
+        """
         print(
             "Пожалуйста введите допустимое число ошибок"
             if self.language == 2
@@ -257,4 +378,7 @@ class InfoForInput:
 
     @classmethod
     def error_log(cls) -> None:
+        """
+        Логирует ошибку неверного ввода через логгер.
+        """
         logger.exception('Invalid input')
