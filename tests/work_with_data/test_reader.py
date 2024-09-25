@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 from src.work_with_data.reader import Reader
 from src.work_with_data.output import InfoForInput
-from src.work_with_data.word import Language, Category, Level
+from src.work_with_data.word import Language
 
 
 # Мокируем методы, которые получают данные от пользователя и предупреждают

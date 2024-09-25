@@ -1,6 +1,5 @@
 from src.visualiser.hangman import StaticHangman, DynamicHangman
 from src.visualiser.display import DisplayConsole
-from src.work_with_data.input import Input
 from src.work_with_data.word import Word
 from src.work_with_data.output import OutputsInGameLogics
 from src.work_with_data.utils import Utils
