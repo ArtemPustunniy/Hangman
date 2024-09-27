@@ -109,6 +109,9 @@ venv
 # ruff
 .ruff_cache/
 
+#logs
+src/logs
+
 # IDE
 .idea/
 .vscode/
